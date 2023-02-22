@@ -20,8 +20,9 @@ My game has 6 functions that I wrote in the game file:
  - thinking() - a cute function that uses a progress bar to make the game appear as if the computer is thinking about it's choice!
 
  My solution uses a game message dictionary that is global in scope
-       so that game play text can be modified in 1 place
-       The game message dictionary does not include any text that refers to instructions that are hard-coded such as the letters typed to indicate a user-choice
+- so that game play text can be modified in 1 place
+- The game message dictionary does not include any text that refers to instructions that are hard-coded such as the letters typed to indicate a user-choice
  There are also 2 dictionaries that are local in scope, where availability is limited to within the function; 
-       these dictionary holds the data to decode the user and computer choices
+- these dictionary holds the data to decode the user and computer choices
  There is also an invisible dictionary holding the keyword arguments sent in (**kwargs) used in the parameters of the make-choice function
+ 
