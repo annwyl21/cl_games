@@ -16,3 +16,5 @@ A selection of command line games in python to demonstrate programming knowledge
 python core_game_rps.py
 ```
 
+Challenges Overcome:
+- forgetting to create .gitignore after creating command line repo, and listing my entire venv for commit!
