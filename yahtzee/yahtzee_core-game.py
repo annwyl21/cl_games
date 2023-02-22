@@ -8,7 +8,7 @@ def dice_dictionary():
     return dice_roll, dice_roll_dictionary
 
 def upper_section(dice_roll):
-    list_to_sum = [dice_roll.count(i) *i for i in range(1,7)] # could this be a lambda function?
+    list_to_sum = [dice_roll.count(i) *i for i in range(1,7)]
     return sum(list_to_sum)
 
 def lower_section(dice_roll, game_dictionary):
@@ -30,12 +30,11 @@ def lower_section(dice_roll, game_dictionary):
             kind_three = [3*i for i in range(0,7) if dice_roll.count(i) == 3]
             results_dictionary["Three of a kind"] = kind_three[0]
     elif dice_set_length == 5:
-        #results_dictionary["LG Straight"] = 40
-#either a sequence of 4 or a sequence of 5
-    # Sequence of Four
-    #sequence_of_four = 0
-    #score 30
-        pass
+        sorted_set = list(set(dice_roll)).sort()
+        if sorted_set = [1, 2, 3, 4, 5] or sorted_set = [2, 3, 4, 5, 6]:
+            results_dictionary["LG Straight"] = 40
+        else:
+            results_dictionary["SM Straight"] = 30
     return results_dictionary
 
 def cl_display(dice_roll, game_dictionary, result_upper, results_dictionary):
