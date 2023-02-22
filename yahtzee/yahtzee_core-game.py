@@ -46,7 +46,7 @@ def score_calculator(dice_roll):
         if sorted_set == [1, 2, 3, 4, 5] or sorted_set == [2, 3, 4, 5, 6]:
             r_dict["LG Straight"] = 40
         else:
-            r_dict["SM Straight"] = 30
+            r_dict["SM Straight"] = 30 # check this one, roll could be 12342, which would be 4 unique numbers, might be better to put the 3 combinations in
     r_dict["Chance"] = sum(dice_roll)
 
 def play_game():
