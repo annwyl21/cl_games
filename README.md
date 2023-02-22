@@ -1,9 +1,6 @@
 # Command Line Games
 
-A selection of command line games in python to demonstrate programming knowledge and ability to use a shell.
-
-**Using Linux Shell**
-- I have used Github Codespaces, Gitbash and Powershell to familiarise myself with Linux command line and to create this repo, edit this readme file and create the file structure from the command line, rather than within my IDE's (VSCode and PyCharm).
+A selection of command line games in python to demonstrate programming knowledge.
 
 **Rock, Paper, Scissors**
 
