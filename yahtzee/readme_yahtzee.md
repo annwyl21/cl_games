@@ -5,3 +5,4 @@ The plan here is to have Yahtzee in 2 forms:
 - as a scorer that can be used to support game play and track an unspecified number of players scores
 
 My game design begins with a list comprehension to determine the computer dice roll.
+Uses another list comprehension to work out the upper_section where equivalent dice are added together
