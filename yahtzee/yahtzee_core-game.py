@@ -1,8 +1,7 @@
 import random
 
-r_dict = {"Aces": 0, "Twos": 0, "Threes": 0, "Fours": 0, "Fives": 0, "Sixes": 0, "Three of a kind": 0, "Four of a kind": 0, "Full House": 0, "SM Straight": 0, "LG Straight": 0, "YAHTZEE": 0, "Chance": 0}
 
-def cl_display(dice_roll):
+def cl_display(dice_roll, r_dict):
     print(f"Yahtzee Score\n\nDice Roll: {dice_roll}\n\nScore")
     for scoretype, score in r_dict.items():
         print(f"{scoretype:>20} {score:>5}")
@@ -14,6 +13,8 @@ def cl_display(dice_roll):
     # print(f"\nGrand Total = {0}")
 
 def score_calculator(dice_roll):
+    r_dict = {"Aces": 0, "Twos": 0, "Threes": 0, "Fours": 0, "Fives": 0, "Sixes": 0, "Three of a kind": 0, "Four of a kind": 0, "Full House": 0, "SM Straight": 0, "LG Straight": 0, "YAHTZEE": 0, "Chance": 0}
+
     # Scoring Aces - Sixes
     upper_list = [dice_roll.count(i) *i for i in range(1,7)]
     r_dict["Aces"] = upper_list[0]
@@ -48,10 +49,12 @@ def score_calculator(dice_roll):
         else:
             r_dict["SM Straight"] = 30 # check this one, roll could be 12342, which would be 4 unique numbers, might be better to put the 3 combinations in
     r_dict["Chance"] = sum(dice_roll)
+    return r_dict
 
 def play_game():
     dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
-    score_calculator(dice_roll)
-    cl_display(dice_roll)
+    results_dict = score_calculator(dice_roll)
+    cl_display(dice_roll, results_dict)
 
-play_game()
+if __name__ == "__main__":
+    play_game()
