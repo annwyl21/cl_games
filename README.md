@@ -11,7 +11,7 @@ A selection of command line games in python to demonstrate programming knowledge
 - The game has an in-game message dictionary that is separate from the code where game messages can be edited without needing to trawl through the code. 
 - The code also demonstrates my programming knowledge of **kwargs, tuple unpacking and positionally based arguments in function parameters.
     - Link to [core game code](./rps/core_game_rps.py)
-    - Link to [RPS demonstrating my programming knowledge](./rps/README_rps.md)
+    - Link to [RPS Feature Details](./rps/README_rps.md)
 
 ## Instructions to play:
 **Rock, Paper, Scissors** run:
