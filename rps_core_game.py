@@ -3,17 +3,19 @@ from datetime import datetime
 import rps_score
 from games.games import Games, Player
 
-ingame_message_dict = {"winner_c": "\tComputer is the WINNER\t\n", 
-                       "rock_win": ">>>>> Rock smashes Scissors<<<<<\n", 
-                       "paper_win": ">>>>> Paper wraps Rock<<<<<\n", 
-                       "scissors_win": ">>>>> Scissors cut Paper<<<<<\n", 
-                       "winner_u": "Congratulations you are the winner!", 
-                       "draw": "\tIt was a draw\t\n", 
-                       "get_ready": [" Ready    ", "Set   ", "Go\n"], 
-                       'welcome': ["Welcome to...\n", "Rock\t", "Paper\t", "Scissors\t\n\n"],
-                       'title': "Rock, Paper, Scissors",
-                       "sorry": "Sorry, I did not understand your choice. \n",
-                       'end_game_message': "Goodbye"}
+ingame_message_dict = {
+    "winner_c": "\tComputer is the WINNER\t\n", 
+    "rock_win": ">>>>> Rock smashes Scissors<<<<<\n", 
+    "paper_win": ">>>>> Paper wraps Rock<<<<<\n", 
+    "scissors_win": ">>>>> Scissors cut Paper<<<<<\n", 
+    "winner_u": "Congratulations you are the winner!", 
+    "draw": "\tIt was a draw\t\n", 
+    "get_ready": [" Ready    ", "Set   ", "Go\n"], 
+    'welcome': ["Welcome to...\n", "Rock\t", "Paper\t", "Scissors\t\n\n"],
+    'title': "Rock, Paper, Scissors",
+    "sorry": "Sorry, I did not understand your choice. \n",
+    'end_game_message': "Goodbye"
+    }
 
 def make_choice(**who_what):  # using **kwargs which takes the arguments and puts them in an invisible dictionary
     if who_what['selector'] == "Computer":  # accessing the keyword argument using a dictionary key
