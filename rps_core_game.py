@@ -1,6 +1,6 @@
 import secrets, time, sys
 from datetime import datetime
-import score
+import rps_score
 from games.games import Games, Player
 
 ingame_message_dict = {"winner_c": "\tComputer is the WINNER\t\n", 
@@ -32,7 +32,7 @@ def make_choice(**who_what):  # using **kwargs which takes the arguments and put
             play_again()      
 
 def play_game():
-    score.thinking()
+    rps_score.thinking()
     computer = make_choice(selector = "Computer")
     human_input = input("\n\tR = Rock\n\tP = Paper\n\tS = Scissors\n\tQ = Quit\nPlease enter R, P, S or Q:\n")
     user = make_choice(selector = "Player", data = human_input)
