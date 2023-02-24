@@ -39,7 +39,7 @@ def save_game():
         now = datetime.now()
         date_time_str = now.strftime("%Y-%m-%d %H:%M")
         with open("saved_score.txt", 'a') as save_score:
-            save_score.write(f"{guess_game.get_title():20}  {guess_computer.get_score()}:{guess_player.get_score()}  {date_time_str}\n")
+            save_score.write(f"{guess_game.get_title():21}  {guess_computer.get_score()}:{guess_player.get_score()}  {date_time_str}\n")
         Games.end_game(ingame_message_dict["end_game_message"])
 
 guess_game = Games('guess')
