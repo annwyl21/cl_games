@@ -1,7 +1,18 @@
 import secrets, time, sys
 import score
+from games.games import Games, Player
 
-ingame_message_dict = {"winner_c": "\tComputer is the WINNER\t\n", "rock_win": ">>>>> Rock smashes Scissors<<<<<\n", "paper_win": ">>>>> Paper wraps Rock<<<<<\n", "scissors_win": ">>>>> Scissors cut Paper<<<<<\n", "winner_u": "Congratulations you are the winner!", "draw": "\tIt was a draw\t\n", "get_ready": [" Ready    ", "Set   ", "Go\n"], 'welcome': ["Welcome to...\n","Rock\t", "Paper\t", "Scissors\t\n\n"], "sorry": "Sorry, I did not understand your choice. \n"}
+ingame_message_dict = {"winner_c": "\tComputer is the WINNER\t\n", 
+                       "rock_win": ">>>>> Rock smashes Scissors<<<<<\n", 
+                       "paper_win": ">>>>> Paper wraps Rock<<<<<\n", 
+                       "scissors_win": ">>>>> Scissors cut Paper<<<<<\n", 
+                       "winner_u": "Congratulations you are the winner!", 
+                       "draw": "\tIt was a draw\t\n", 
+                       "get_ready": [" Ready    ", "Set   ", "Go\n"], 
+                       'welcome': ["Welcome to...\n"],
+                       'title': ["Rock\t", "Paper\t", "Scissors\t\n\n"],
+                       "sorry": "Sorry, I did not understand your choice. \n",
+                       'end_game_message': "Goodbye"}
 
 def make_choice(**who_what):  # using **kwargs which takes the arguments and puts them in an invisible dictionary
     if who_what['selector'] == "Computer":  # accessing the keyword argument using a dictionary key
@@ -10,20 +21,20 @@ def make_choice(**who_what):  # using **kwargs which takes the arguments and put
         user_dict = {"R": "Rock", "P": "Paper", "S": "Scissors"}
         data_to_check = who_what["data"].upper()
         if data_to_check == "Q":
-            end_game()
+            Games.end_game(ingame_message_dict["end_game_message"])
         elif data_to_check in ["R", "P", "S"]:
         # elif data_to_check == "R" or data_to_check == "S" or data_to_check == "P":
             if data_to_check in user_dict:
                 return user_dict[data_to_check]
         else:
             print(ingame_message_dict["sorry"])
-            play_again(who_what["player_score"], who_what["computer_score"])      
+            play_again()      
 
-def play_game(player_score, computer_score):
+def play_game():
     score.thinking()
     computer = make_choice(selector = "Computer")
     human_input = input("\n\tR = Rock\n\tP = Paper\n\tS = Scissors\n\tQ = Quit\nPlease enter R, P, S or Q:\n")
-    user = make_choice(selector = "Player", data = human_input, player_score = player_score, computer_score = computer_score)
+    user = make_choice(selector = "Player", data = human_input)
     print(f"\tYou chose {user}\n\tand\t\n\tComputer chose {computer}\n")
     winner = ""
     if user == computer:
@@ -53,9 +64,9 @@ def play_game(player_score, computer_score):
             print(ingame_message_dict["scissors_win"])
             congratulations()
             winner = "player"
-    score_tuple = score.score_tracker(winner, player_score, computer_score)
-    new_player_score, new_computer_score = score_tuple #unpacking a tuple
-    play_again(new_player_score, new_computer_score)
+    score_tracker(winner)
+    # new_player_score, new_computer_score = score_tuple #unpacking a tuple
+    play_again()
 
 def congratulations():
     winner_message = ingame_message_dict["winner_u"]
@@ -64,22 +75,38 @@ def congratulations():
     print("*" * 6 + "*" * len(winner_message) + "*" * 6)
     print()
 
-def end_game():
-    print("Goodbye\n", "="*50)
-    sys.exit()
+# def end_game():
+#     print("Goodbye\n", "="*50)
+#     sys.exit()
 
-def play_again(player_score, computer_score):
+def play_again():
     decision = input("Press enter to play again or Q to quit\n")  # Q is hardcoded so this text is not available to modify in the game dictionary
     if decision in ["Q", "q"]:
     #if decision == "Q" or decision == "q":
-        end_game()
+        Games.end_game(ingame_message_dict["end_game_message"])
     else:
-        play_game(player_score, computer_score)
+        play_game()
 
-def open_game():
-    for item in ingame_message_dict['welcome']:
-        time.sleep(0.85)
-        print(item, end = '', flush = True)
-    play_game(player_score = 0, computer_score = 0)
-    
-open_game()
+# def open_game():
+#     for item in ingame_message_dict['welcome']:
+#         time.sleep(0.85)
+#         print(item, end = '', flush = True)
+#     play_game(player_score = 0, computer_score = 0)
+
+def score_tracker(winner):
+    if winner == "computer":
+        rps_computer.increase_score(1)
+    else:
+        rps_player.increase_score(1)
+    print(f"Your score is {rps_player.get_score()} and the computer has {rps_computer.get_score()}.")
+
+rps_game = Games('rps')
+rps_game.set_title(ingame_message_dict["title"])
+
+rps_game.open_game(ingame_message_dict["welcome"])
+rps_game.open_game(rps_game.get_title())
+
+rps_computer = Player(0)
+rps_player = Player(0)
+play_game()
+

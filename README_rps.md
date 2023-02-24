@@ -1,5 +1,7 @@
 # Rock, Paper, Scissors - Feature Details
 
+This was such a cool game until I broke it - but I hope to have to fixed and into classes soon...
+
 My game has 6 functions that I wrote in the game file:
  - open_game() uses the sleep module to make the loading deliberately slower and build excitement and anticipation,
        separated from play_game() so the user is not subsequently bored by this intro if they choose to play again
