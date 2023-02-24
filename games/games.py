@@ -3,12 +3,12 @@ import sys, time
 
 class Games: # defining a datatype of game
 
-    def __init__(self, name): # initialising an instance and adding instance variables
-        self._name = name
+    def __init__(self, name_of_game): # initialising an instance and adding instance variables
+        self._name = name_of_game
         
 
-    def set_title(self, title): # setter
-        self._title = title
+    def set_title(self, title_of_game): # setter
+        self._title = title_of_game
 
     def get_title(self):
         return self._title

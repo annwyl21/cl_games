@@ -1,4 +1,5 @@
 import secrets, time, sys
+from datetime import datetime
 import score
 from games.games import Games, Player
 
@@ -9,8 +10,8 @@ ingame_message_dict = {"winner_c": "\tComputer is the WINNER\t\n",
                        "winner_u": "Congratulations you are the winner!", 
                        "draw": "\tIt was a draw\t\n", 
                        "get_ready": [" Ready    ", "Set   ", "Go\n"], 
-                       'welcome': ["Welcome to...\n"],
-                       'title': ["Rock\t", "Paper\t", "Scissors\t\n\n"],
+                       'welcome': ["Welcome to...\n", "Rock\t", "Paper\t", "Scissors\t\n\n"],
+                       'title': "Rock, Paper, Scissors",
                        "sorry": "Sorry, I did not understand your choice. \n",
                        'end_game_message': "Goodbye"}
 
@@ -21,7 +22,7 @@ def make_choice(**who_what):  # using **kwargs which takes the arguments and put
         user_dict = {"R": "Rock", "P": "Paper", "S": "Scissors"}
         data_to_check = who_what["data"].upper()
         if data_to_check == "Q":
-            Games.end_game(ingame_message_dict["end_game_message"])
+            save_game()
         elif data_to_check in ["R", "P", "S"]:
         # elif data_to_check == "R" or data_to_check == "S" or data_to_check == "P":
             if data_to_check in user_dict:
@@ -83,7 +84,7 @@ def play_again():
     decision = input("Press enter to play again or Q to quit\n")  # Q is hardcoded so this text is not available to modify in the game dictionary
     if decision in ["Q", "q"]:
     #if decision == "Q" or decision == "q":
-        Games.end_game(ingame_message_dict["end_game_message"])
+        save_game()
     else:
         play_game()
 
@@ -100,11 +101,21 @@ def score_tracker(winner):
         rps_player.increase_score(1)
     print(f"Your score is {rps_player.get_score()} and the computer has {rps_computer.get_score()}.")
 
+def save_game():
+    save = input("Do you wish to save the scores? Y or N")
+    if save in ["n", "N", 'q', "Q"]:
+        Games.end_game(ingame_message_dict["end_game_message"])
+    else:
+        now = datetime.now()
+        date_time_str = now.strftime("%Y-%m-%d %H:%M")
+        with open("saved_score.txt", 'a') as save_score:
+            save_score.write(f"{rps_game.get_title()}  {rps_computer.get_score()}:{rps_player.get_score()}  {date_time_str}\n")
+        Games.end_game(ingame_message_dict["end_game_message"])
+
 rps_game = Games('rps')
 rps_game.set_title(ingame_message_dict["title"])
 
 rps_game.open_game(ingame_message_dict["welcome"])
-rps_game.open_game(rps_game.get_title())
 
 rps_computer = Player(0)
 rps_player = Player(0)
