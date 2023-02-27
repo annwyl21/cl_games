@@ -68,21 +68,17 @@ class Game_rps:
                     self.data_to_check = input("\n\t(R)ock\n\t(P)aper\n\t(S)cissors\n\t(Q)uit\n")
 
     def game_logic(self, computer_choice, user_choice):
-        winner = ""
         if user_choice == computer_choice:
             print(ingame_message_dict["draw"])
-            winner = "None"
         # winning scenarios for computer
         elif (user_choice == "Rock" and computer_choice == "Paper") or (user_choice == "Paper" and computer_choice == "Scissors") or (user_choice == "Scissors" and computer_choice == "Rock"):
-            winner = "computer"
+            self.set_winner("computer")
             self.result_message(computer_choice)
             self.increase_score("computer")
         else:
-            winner = "player"
+            self.set_winner("player")
             self.result_message(user_choice)
             self.increase_score("player")
-        self.set_winner(winner)
-        return winner
     
     def result_message(self, choice):
         print(ingame_message_dict[choice])
