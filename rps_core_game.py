@@ -2,11 +2,11 @@ import random, time, sys
 from datetime import datetime
 
 ingame_message_dict = {
-    "winner_c": "\tComputer is the WINNER\t\n", 
+    "computer": "\tComputer is the WINNER\t\n", 
     "Rock": ">>>>> Rock smashes Scissors <<<<<\n", 
     "Paper": ">>>>> Paper wraps Rock <<<<<\n", 
     "Scissors": ">>>>> Scissors cut Paper <<<<<\n", 
-    "winner_u": "Congratulations you are the winner!", 
+    "player": "Congratulations you are the winner!", 
     "draw": "\t<<<<< DRAW >>>>>\t\n", 
     "get_ready": [" Ready    ", "Set   ", "Go\n"], 
     'welcome': ["Welcome to...\n", "Rock\t", "Paper\t", "Scissors\t\n\n"],
@@ -44,6 +44,12 @@ class Game_rps:
     def get_match_count(self):
         return self._match_count
     
+    def set_winner(self, winner):
+        self._winner = winner
+
+    def get_winner(self):
+        return self._winner
+    
     def end_game(self):
         print("Goodbye\n", "="*50)
         sys.exit()
@@ -61,23 +67,29 @@ class Game_rps:
                     print(ingame_message_dict["sorry"])
                     self.data_to_check = input("\n\t(R)ock\n\t(P)aper\n\t(S)cissors\n\t(Q)uit\n")
 
-    def game_logic(self, computer, user_choice):
-        if user_choice == computer:
+    def game_logic(self, computer_choice, user_choice):
+        winner = ""
+        if user_choice == computer_choice:
             print(ingame_message_dict["draw"])
+            winner = "None"
         # winning scenarios for computer
-        elif (user_choice == "Rock" and computer == "Paper") or (user_choice == "Paper" and computer == "Scissors") or (user_choice == "Scissors" and computer == "Rock"):
-            self.result_message(computer, winner = "computer")
+        elif (user_choice == "Rock" and computer_choice == "Paper") or (user_choice == "Paper" and computer_choice == "Scissors") or (user_choice == "Scissors" and computer_choice == "Rock"):
+            winner = "computer"
+            self.result_message(computer_choice)
             self.increase_score("computer")
         else:
+            winner = "player"
             self.result_message(user_choice)
             self.increase_score("player")
+        self.set_winner(winner)
+        return winner
     
-    def result_message(self, choice, winner = "player"):
+    def result_message(self, choice):
         print(ingame_message_dict[choice])
-        if winner == "computer":
-            ingame_message_dict["winner_c"]
+        if self.get_winner() == "computer":
+            ingame_message_dict[self.get_winner()]
         else:
-            winner_message = ingame_message_dict["winner_u"]
+            winner_message = ingame_message_dict[self.get_winner()]
             print("*" * 6 + "*" * len(winner_message) + "*" * 6)
             print("*" * 6 + winner_message + "*" * 6)
             print("*" * 6 + "*" * len(winner_message) + "*" * 6)
