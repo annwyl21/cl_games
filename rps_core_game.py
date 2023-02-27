@@ -85,6 +85,7 @@ class Game_rps:
             self.set_winner("player")
             self.result_message(player_choice)
             self.increase_score("player")
+        return self.get_winner()
     
     def result_message(self, choice):
         print(ingame_message_dict[choice])
@@ -135,7 +136,11 @@ class Game_rps:
         # offer to play again
         self.play_again()
 
-rpsgame = Game_rps() # create instance of the game passing in arguments to set the player score, computer score and count of matches played
 
 if __name__ == "__main__":
-    rpsgame.play_game() # call a method on the instance of the game to start play
+
+# create instance of the game passing in arguments to set the player score, computer score and count of matches played
+    #rpsgame = Game_rps() 
+
+# create the instance and call a method on the instance of the game to start play
+    Game_rps().play_game() 
