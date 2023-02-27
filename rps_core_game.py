@@ -76,6 +76,7 @@ class Game_rps:
     def game_logic(self, computer_choice, player_choice):
         if player_choice == computer_choice:
             print(ingame_message_dict["draw"])
+            self.set_winner("draw")
         # winning scenarios for computer
         elif (player_choice == "Rock" and computer_choice == "Paper") or (player_choice == "Paper" and computer_choice == "Scissors") or (player_choice == "Scissors" and computer_choice == "Rock"):
             self.set_winner("computer")

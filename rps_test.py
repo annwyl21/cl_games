@@ -9,7 +9,7 @@ from rps_core_game import *
 # def test_answer():
 #     assert func(3) == 5
 
-# my logic copied from the game
+# my logic copied from the game to this file
 # def game_logic(computer_choice, user_choice):
 #     winner = ""
 #     if user_choice == computer_choice:
@@ -28,8 +28,24 @@ from rps_core_game import *
 #     return winner
 
 
-# PYTEST
+# PYTEST - checking the function within the game
+# tests 1 thing
 def test_check_game_logic():
     results = Game_rps().game_logic(computer_choice = "Rock", player_choice = "Paper")
     assert results == "player", "wrong result"
 
+# tests all of the possible scenarios
+@pytest.mark.parametrize("computer_choice, player_choice, answer", [
+        ("Rock", "Rock", "draw"),
+        ("Rock", "Paper", "player"),
+        ("Rock", "Scissors", "computer"),
+        ("Scissors", "Scissors", "draw"),
+        ("Scissors", "Rock", "player"),
+        ("Scissors", "Paper", "computer"),
+        ("Paper", "Paper", "draw"),
+        ("Paper", "Rock", "computer"),
+        ("Paper", "Scissors", "player")
+    ])
+def test_test_game_logic(computer_choice, player_choice, answer):
+    results = Game_rps().game_logic(computer_choice, player_choice)
+    assert results == answer, "wrong result"
