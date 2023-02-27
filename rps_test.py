@@ -30,11 +30,14 @@ from rps_core_game import *
 
 # PYTEST - checking the function within the game
 # tests 1 thing
+# https://docs.pytest.org/en/7.2.x/getting-started.html#getstarted
 def test_check_game_logic():
     results = Game_rps().game_logic(computer_choice = "Rock", player_choice = "Paper")
     assert results == "player", "wrong result"
 
 # tests all of the possible scenarios
+# https://docs.pytest.org/en/6.2.x/parametrize.html
+# Here, the @parametrize decorator defines ten different (test_input,expected) tuples so that the test_eval function will run ten times using them in turn
 @pytest.mark.parametrize("computer_choice, player_choice, answer", [
         ("Rock", "Rock", "draw"),
         ("Rock", "Paper", "player"),
