@@ -3,9 +3,9 @@ from datetime import datetime
 
 ingame_message_dict = {
     "winner_c": "\tComputer is the WINNER\t\n", 
-    "rock_win": ">>>>> Rock smashes Scissors<<<<<\n", 
-    "paper_win": ">>>>> Paper wraps Rock<<<<<\n", 
-    "scissors_win": ">>>>> Scissors cut Paper<<<<<\n", 
+    "Rock": ">>>>> Rock smashes Scissors <<<<<\n", 
+    "Paper": ">>>>> Paper wraps Rock <<<<<\n", 
+    "Scissors": ">>>>> Scissors cut Paper <<<<<\n", 
     "winner_u": "Congratulations you are the winner!", 
     "draw": "\t<<<<< DRAW >>>>>\t\n", 
     "get_ready": [" Ready    ", "Set   ", "Go\n"], 
@@ -22,8 +22,7 @@ class Game_rps:
         self._player_score = player_score
         self._computer_score = computer_score
         self._match_count = match_count
-
-    # BEHAVIOUR
+    
     def increase_score(self, winner):
         if winner == "player":
             self._player_score += 1
@@ -61,13 +60,28 @@ class Game_rps:
                 else:
                     print(ingame_message_dict["sorry"])
                     self.data_to_check = input("\n\t(R)ock\n\t(P)aper\n\t(S)cissors\n\t(Q)uit\n")
+
+    def game_logic(self, computer, user_choice):
+        if user_choice == computer:
+            print(ingame_message_dict["draw"])
+        # winning scenarios for computer
+        elif (user_choice == "Rock" and computer == "Paper") or (user_choice == "Paper" and computer == "Scissors") or (user_choice == "Scissors" and computer == "Rock"):
+            self.result_message(computer, winner = "computer")
+            self.increase_score("computer")
+        else:
+            self.result_message(user_choice)
+            self.increase_score("player")
     
-    def congratulations(self):
-        winner_message = ingame_message_dict["winner_u"]
-        print("*" * 6 + "*" * len(winner_message) + "*" * 6)
-        print("*" * 6 + winner_message + "*" * 6)
-        print("*" * 6 + "*" * len(winner_message) + "*" * 6)
-        print()
+    def result_message(self, choice, winner = "player"):
+        print(ingame_message_dict[choice])
+        if winner == "computer":
+            ingame_message_dict["winner_c"]
+        else:
+            winner_message = ingame_message_dict["winner_u"]
+            print("*" * 6 + "*" * len(winner_message) + "*" * 6)
+            print("*" * 6 + winner_message + "*" * 6)
+            print("*" * 6 + "*" * len(winner_message) + "*" * 6)
+            print()
 
     def save_game(self):
         save = input("Do you wish to save the scores? Y or N ")
@@ -79,7 +93,6 @@ class Game_rps:
             with open("saved_score.txt", 'a') as save_score:
                 save_score.write(f"Rock, Paper, Scissors  {self.get_computer_score()}:{self.get_player_score()}  {date_time_str}\n")
             self.end_game()
-
 
     def play_game(self):
 
@@ -93,40 +106,14 @@ class Game_rps:
                 time.sleep(0.15)
                 print('.', end = '', flush=True)
         
-        #game logic
-        computer = random.choice(["Rock", "Paper", "Scissors"])
+        # making rock, paper, scissors choices
+        computer_choice = random.choice(["Rock", "Paper", "Scissors"])
         data_to_check = input("\n\t(R)ock\n\t(P)aper\n\t(S)cissors\n\t(Q)uit\n")
-        user = self.validate(data_to_check)
-        print(f"\tYou chose {user}\n\tand\t\n\tComputer chose {computer}\n")
-    
-        winner = ""
-        if user == computer:
-            print(ingame_message_dict["draw"])
-            winner = "None"
-        elif user == "Rock":
-            if computer == "Paper":
-                print(ingame_message_dict["paper_win"], ingame_message_dict["winner_c"])
-                self.increase_score("computer")
-            else:
-                print(ingame_message_dict["rock_win"])
-                self.congratulations()
-                self.increase_score("player")
-        elif user == "Paper":
-            if computer == "Scissors":
-                print(ingame_message_dict["scissors_win"], ingame_message_dict["winner_c"])
-                self.increase_score("computer")
-            else:
-                print(ingame_message_dict["paper_win"])
-                self.congratulations()
-                self.increase_score("player")
-        else:  # if the human_player chooses Scissors
-            if computer == "Rock":
-                print(ingame_message_dict["rock_win"], ingame_message_dict["winner_c"])
-                self.increase_score("computer")
-            else:
-                print(ingame_message_dict["scissors_win"])
-                self.congratulations()
-                self.increase_score("player")
+        user_choice = self.validate(data_to_check)
+        print(f"\tYou chose {user_choice}\n\tand\t\n\tComputer chose {computer_choice}\n")
+
+        # calling game logic
+        self.game_logic(computer_choice, user_choice)
     
         # end of match, print score and count matches
         self.increase_match_count()
@@ -140,4 +127,6 @@ class Game_rps:
             self.play_game()
 
 rpsgame = Game_rps() # create instance of the game passing in arguments to set the player score, computer score and count of matches played
-rpsgame.play_game() # call a method on the instance of the game to start play
+
+if __name__ == "__main__":
+    rpsgame.play_game() # call a method on the instance of the game to start play
