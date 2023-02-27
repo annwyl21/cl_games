@@ -140,7 +140,7 @@ class Game_rps:
 
 if __name__ == "__main__":
 
-# create instance of the game passing in arguments to set the player score, computer score and count of matches played
+# create instance of the game passing in arguments to set the player score, computer score and count of matches played but because I don't need to use the result, the save and write to file is contained within the class at the moment, I don't need to assign the instance to a variable
     #rpsgame = Game_rps() 
 
 # create the instance and call a method on the instance of the game to start play
