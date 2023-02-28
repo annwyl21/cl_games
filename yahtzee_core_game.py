@@ -1,4 +1,5 @@
 import random
+from yahtzee_calc import Yahtzee_calc
 
 
 def cl_display(dice_roll, r_dict):
@@ -18,7 +19,7 @@ call score caluclator
 
 def play_game():
     dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
-    results_dict = score_calculator(dice_roll)
+    results_dict = Yahtzee_calc.calculator(dice_roll)
     cl_display(dice_roll, results_dict)
 
 if __name__ == "__main__":

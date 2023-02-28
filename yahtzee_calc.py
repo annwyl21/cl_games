@@ -4,16 +4,36 @@ class Yahtzee_calc:
     
     def __init__(self, dice_roll):
         self._dice_roll = dice_roll
-        self._upper_score = {"Aces": 0, "Twos": 0, "Threes": 0, "Fours": 0, "Fives": 0, "Sixes": 0}
-        self._lower_score = {"Three of a kind": 0, "Four of a kind": 0, "Full House": 0, "SM Straight": 0, "LG Straight": 0, "YAHTZEE": 0, "Chance": 0}
+        self._upper_score = {"aces": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0}
+        self._lower_score = {"three_of_a_kind": 0, "four_of_a_kind": 0, "full_house": 0, "sm_straight": 0, "lg_straight": 0, "yahtzee": 0, "chance": 0}
 
     def get_dice_roll(self):
         return self._dice_roll
-    
+        
     def dice_count(self):
-        print(self.get_dice_roll())
+        dice_count = [self._dice_roll.count(face_value) for face_value in range(1,7)]
+        return dice_count
+    
+    def calculate_upper_score(self):
+        scores = [self._dice_roll.count(i) *i for i in range(1,7)]
+        upper_score_names = ["aces", "twos", "threes", "fours", "fives", "sixes"]
+        upper_score_dict = {}
+        for num, name in enumerate(upper_score_names):
+            upper_score_dict[name] = scores[num]
+        return upper_score_dict
 
-    self.dice_count()
+    def update_scores(self):
+        self._upper_score = self.calculate_upper_score()
+
+    def get_upper_score(self):
+        return self._upper_score
+    
+    def calculator(self):
+        self.update_scores()
+        return self.get_upper_score()
+
+
+
         
     
 
@@ -32,6 +52,8 @@ class Yahtzee_calc:
     #     dice_count.append(dice_roll.count(i))
     
     # dice_set_length = len(set(dice_roll))
+
+    #for num, score in enumerate(scores):
 
     # if dice_set_length == 1:
     #     r_dict["YAHTZEE"] = 50
@@ -59,3 +81,5 @@ if __name__ == "__main__":
     computer_dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
     # create a single instance of a turn of play using the dice roll and call it the computers turn
     computer = Yahtzee_calc(computer_dice_roll)
+
+    print ("test", computer.calculator())
