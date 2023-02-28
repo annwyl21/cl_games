@@ -56,6 +56,9 @@ class Yahtzee_calc:
         #     else:
         #         lower_score_dict["SM Straight"] = 30 # check this one, roll could be 12342, which would be 4 unique numbers, might be better to put the 3 combinations in
         # lower_score_dict["Chance"] = sum(self.dice_roll)
+
+        # chance score
+        lower_score_dict["chance"] = sum(self._dice_roll)
         return lower_score_dict
 
 

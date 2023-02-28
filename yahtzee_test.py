@@ -117,7 +117,8 @@ def test_yahtzee(dice_roll, answer):
     results = Yahtzee_calc(dice_roll).calculate_lower_score()
     assert results["yahtzee"] == answer, "Yahtzee is incorrect"
 
-# def test_chance(dice_roll):
-#     dice_roll = [5, 1, 5, 2, 3]
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results == 16, "Chance is incorrect"
+def test_chance():
+    dice_roll = [5, 1, 5, 2, 3]
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["chance"] == 16, "Chance is incorrect"
+    
