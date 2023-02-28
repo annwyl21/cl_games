@@ -65,7 +65,7 @@ class Game_rps:
     def make_choice(self):
         player_input = input(ingame_message_dict["offer_choice"]).upper()
         choice_dict = {"R": "Rock", "P": "Paper", "S": "Scissors"}
-        if player_input in choice_dict.keys():
+        if player_input in choice_dict: # don't need to put .keys() because keys is the default search
             return choice_dict[player_input]
         elif player_input == "Q" or player_input == "q":
             self.save_game()
