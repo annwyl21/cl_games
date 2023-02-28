@@ -59,35 +59,35 @@ def test_sixes(dice_roll, answer):
 
 # Test lower section
 
-# @pytest.mark.parametrize("dice_roll, answer", [
-#         ([6, 6, 6, 2, 3], 18),
-#         ([6, 5, 4, 4, 4], 12),
-#         ([1, 6, 6, 6, 3], 18),
-#         ([2, 1, 2, 3, 2], 6)
-#     ])
-# def test_three_of_a_kind(dice_roll, answer):
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results["three_of_a_kind"] == answer, "Three of a kind is incorrect"
+@pytest.mark.parametrize("dice_roll, answer", [
+        ([6, 6, 6, 2, 3], 18),
+        ([6, 5, 4, 4, 4], 12),
+        ([1, 6, 6, 6, 3], 18),
+        ([2, 1, 2, 3, 2], 6)
+    ])
+def test_three_of_a_kind(dice_roll, answer):
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["three_of_a_kind"] == answer, "Three of a kind is incorrect"
 
-# @pytest.mark.parametrize("dice_roll, answer", [
-#         ([6, 6, 6, 6, 3], 24),
-#         ([6, 4, 4, 4, 4], 16),
-#         ([1, 6, 6, 6, 6], 24),
-#         ([2, 1, 2, 2, 2], 8)
-#     ])
-# def test_four_of_a_kind(dice_roll, answer):
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results["four_of_a_kind"] == answer, "Four of a kind is incorrect"
+@pytest.mark.parametrize("dice_roll, answer", [
+        ([6, 6, 6, 6, 3], 24),
+        ([6, 4, 4, 4, 4], 16),
+        ([1, 6, 6, 6, 6], 24),
+        ([2, 1, 2, 2, 2], 8)
+    ])
+def test_four_of_a_kind(dice_roll, answer):
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["four_of_a_kind"] == answer, "Four of a kind is incorrect"
 
-# @pytest.mark.parametrize("dice_roll, answer", [
-#         ([6, 6, 6, 5, 5], 25),
-#         ([2, 2, 4, 4, 4], 25),
-#         ([1, 6, 6, 6, 1], 25),
-#         ([2, 1, 2, 1, 2], 25)
-#     ])
-# def test_full_house(dice_roll, answer):
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results["full_house"] == answer, "Full House is incorrect"
+@pytest.mark.parametrize("dice_roll, answer", [
+        ([6, 6, 6, 5, 5], 25),
+        ([2, 2, 4, 4, 4], 25),
+        ([1, 6, 6, 6, 1], 25),
+        ([2, 1, 2, 1, 2], 25)
+    ])
+def test_full_house(dice_roll, answer):
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["full_house"] == answer, "Full House is incorrect"
 
 # @pytest.mark.parametrize("dice_roll, answer", [
 #         ([1, 2, 3, 4, 6], 30),
@@ -99,23 +99,23 @@ def test_sixes(dice_roll, answer):
 #     results = Yahtzee_calc.get_lower_score(dice_roll)
 #     assert results["sm_straight"] == answer, "Small Straight is incorrect"
 
-# @pytest.mark.parametrize("dice_roll, answer", [
-#         ([1, 2, 3, 4, 5], 40),
-#         ([2, 5, 4, 3, 6], 40),
-#         ([2, 3, 4, 5, 6], 40),
-#         ([5, 1, 2, 4, 3], 40)
-#     ])
-# def test_large_straight(dice_roll, answer):
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results["lg_straight"] == answer, "Large Straight is incorrect"
+@pytest.mark.parametrize("dice_roll, answer", [
+        ([1, 2, 3, 4, 5], 40),
+        ([2, 5, 4, 3, 6], 40),
+        ([2, 3, 4, 5, 6], 40),
+        ([5, 1, 2, 4, 3], 40)
+    ])
+def test_large_straight(dice_roll, answer):
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["lg_straight"] == answer, "Large Straight is incorrect"
 
-# @pytest.mark.parametrize("dice_roll, answer", [
-#         ([1, 1, 1, 1, 1], 50),
-#         ([3, 3, 3, 3, 3], 50)
-#     ])
-# def test_yahtzee(dice_roll, answer):
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results["yahtzee"] == answer, "Yahtzee is incorrect"
+@pytest.mark.parametrize("dice_roll, answer", [
+        ([1, 1, 1, 1, 1], 50),
+        ([3, 3, 3, 3, 3], 50)
+    ])
+def test_yahtzee(dice_roll, answer):
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["yahtzee"] == answer, "Yahtzee is incorrect"
 
 # def test_chance(dice_roll):
 #     dice_roll = [5, 1, 5, 2, 3]

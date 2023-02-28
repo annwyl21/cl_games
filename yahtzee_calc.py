@@ -32,54 +32,49 @@ class Yahtzee_calc:
         self.update_scores()
         return self.get_upper_score()
 
-
-
+    def calculate_lower_score(self):
         
-    
+        lower_score_dict = {}
+        dice_set_length = len(set(self._dice_roll))
+        
+        # score yahtzee, full house, four of a kind, three of a kind
+        if dice_set_length == 1:
+            lower_score_dict["yahtzee"] = 50
+        elif dice_set_length == 2:
+            if 3 in self.dice_count() and 2 in self.dice_count():
+                lower_score_dict["full_house"] = 25
+            elif 4 in self.dice_count():
+                kind_four = [4*i for i in range(0,7) if self._dice_roll.count(i) == 4]
+                lower_score_dict["four_of_a_kind"] = kind_four[0]
+        elif 3 in self.dice_count():
+                kind_three = [3*i for i in range(0,7) if self._dice_roll.count(i) == 3]
+                lower_score_dict["three_of_a_kind"] = kind_three[0]
+        elif dice_set_length == 5:
 
-    # # Scoring Aces - Sixes
-    # upper_list = [dice_roll.count(i) *i for i in range(1,7)]
-    # r_dict["Aces"] = upper_list[0]
-    # r_dict["Twos"] = upper_list[1]
-    # r_dict["Threes"] = upper_list[2]
-    # r_dict["Fours"] = upper_list[3]
-    # r_dict["Fives"] = upper_list[4]
-    # r_dict["Sixes"] = upper_list[5]
-    
-    # # Scoring lower section
-    # dice_count = []
-    # for i in range(1,7):
-    #     dice_count.append(dice_roll.count(i))
-    
-    # dice_set_length = len(set(dice_roll))
+            test = self._dice_roll
+            untest=test.sort()
+            print("test", test)
+            print(type(untest))
 
-    #for num, score in enumerate(scores):
-
-    # if dice_set_length == 1:
-    #     r_dict["YAHTZEE"] = 50
-    # elif dice_set_length == 2:
-    #     if 3 in dice_count and 2 in dice_count:
-    #         r_dict["Full House"] = 25
-    #     elif 4 in dice_count:
-    #         kind_four = [4*i for i in range(0,7) if dice_roll.count(i) == 4]
-    #         r_dict["Four of a kind"] = kind_four[0]
-    # elif 3 in dice_count:
-    #         kind_three = [3*i for i in range(0,7) if dice_roll.count(i) == 3]
-    #         r_dict["Three of a kind"] = kind_three[0]
-    # elif dice_set_length == 5:
-    #     sorted_set = list(set(dice_roll)).sort()
-    #     if sorted_set == [1, 2, 3, 4, 5] or sorted_set == [2, 3, 4, 5, 6]:
-    #         r_dict["LG Straight"] = 40
-    #     else:
-    #         r_dict["SM Straight"] = 30 # check this one, roll could be 12342, which would be 4 unique numbers, might be better to put the 3 combinations in
-    # r_dict["Chance"] = sum(dice_roll)
-    # return r_dict
+            mylist = list(set(self._dice_roll))
+            print("list", mylist)
+            
+            
+            # if sorted_set == [1, 2, 3, 4, 5] or sorted_set == [2, 3, 4, 5, 6]:
+            #     lower_score_dict["lg_straight"] = 40
+        #     else:
+        #         lower_score_dict["SM Straight"] = 30 # check this one, roll could be 12342, which would be 4 unique numbers, might be better to put the 3 combinations in
+        # lower_score_dict["Chance"] = sum(self.dice_roll)
+        return lower_score_dict
 
 
 if __name__ == "__main__":
     # create a random dice roll
-    computer_dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
+    #computer_dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
+    computer_dice_roll = [5, 1, 2, 4, 3]
+    print(computer_dice_roll)
     # create a single instance of a turn of play using the dice roll and call it the computers turn
     computer = Yahtzee_calc(computer_dice_roll)
 
-    print ("test", computer.calculator())
+    #print ("test", computer.calculator())
+    print("test", computer.calculate_lower_score())
