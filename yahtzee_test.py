@@ -89,15 +89,15 @@ def test_full_house(dice_roll, answer):
     results = Yahtzee_calc(dice_roll).calculate_lower_score()
     assert results["full_house"] == answer, "Full House is incorrect"
 
-# @pytest.mark.parametrize("dice_roll, answer", [
-#         ([1, 2, 3, 4, 6], 30),
-#         ([2, 5, 4, 3, 2], 30),
-#         ([1, 6, 2, 4, 3], 30),
-#         ([5, 2, 2, 4, 3], 30)
-#     ])
-# def test_small_straight(dice_roll, answer):
-#     results = Yahtzee_calc.get_lower_score(dice_roll)
-#     assert results["sm_straight"] == answer, "Small Straight is incorrect"
+@pytest.mark.parametrize("dice_roll, answer", [
+        ([1, 2, 3, 4, 6], 30),
+        ([2, 5, 4, 3, 2], 30),
+        ([1, 6, 2, 4, 3], 30),
+        ([5, 2, 2, 4, 3], 30)
+    ])
+def test_small_straight(dice_roll, answer):
+    results = Yahtzee_calc(dice_roll).calculate_lower_score()
+    assert results["sm_straight"] == answer, "Small Straight is incorrect"
 
 @pytest.mark.parametrize("dice_roll, answer", [
         ([1, 2, 3, 4, 5], 40),
@@ -121,4 +121,3 @@ def test_chance():
     dice_roll = [5, 1, 5, 2, 3]
     results = Yahtzee_calc(dice_roll).calculate_lower_score()
     assert results["chance"] == 16, "Chance is incorrect"
-    
