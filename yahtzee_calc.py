@@ -34,9 +34,8 @@ class Yahtzee_calc:
     
     # call calculator to run and return the score dictionary
     def calculator(self):
-        self.update_scores()
-        return self.get_score_dict()
-    
+        return self.update_scores()
+        
     def calculate_upper_score(self):
         scores = [self._dice_roll.count(i) *i for i in range(1,7)]
         upper_score_names = ["aces", "twos", "threes", "fours", "fives", "sixes"]
