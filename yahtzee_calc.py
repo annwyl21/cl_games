@@ -1,4 +1,9 @@
-import random, re
+import random
+
+# ABSTRACTION: the calculator is only calculating the possible scores from a sinlge dice roll, it is not concerned with the bonus or state of play of the game
+# ENCAPSULATION: each instance is an encapsulation of a single dice roll 
+
+# call calculator() to run and return the score dictionary
 
 class Yahtzee_calc:
     
@@ -27,6 +32,7 @@ class Yahtzee_calc:
     def get_score_dict(self):
         return self._score_dict
     
+    # call calculator to run and return the score dictionary
     def calculator(self):
         self.update_scores()
         return self.get_score_dict()
@@ -93,9 +99,8 @@ class Yahtzee_calc:
 if __name__ == "__main__":
     # create a random dice roll
     computer_dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
-    print(computer_dice_roll)
     # create a single instance of a turn of play using the dice roll and call it the computers turn
     computer = Yahtzee_calc(computer_dice_roll)
 
     #print ("test", computer.calculator())
-    print("overall result test", computer.calculator())
+    print("overall result", computer.calculator())
