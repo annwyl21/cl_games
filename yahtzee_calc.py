@@ -14,6 +14,21 @@ class Yahtzee_calc:
         dice_count = [self._dice_roll.count(face_value) for face_value in range(1,7)]
         return dice_count
     
+    def update_scores(self):
+        self._upper_score = self.calculate_upper_score()
+        self._lower_score = self.calculate_lower_score()
+
+    def get_upper_score(self):
+        return self._upper_score
+    
+    def get_lower_score(self):
+        return self._lower_score
+    
+    def calculator(self):
+        self.update_scores()
+        #find highest scores
+        return self.get_upper_score(), self.get_lower_score()
+    
     def calculate_upper_score(self):
         scores = [self._dice_roll.count(i) *i for i in range(1,7)]
         upper_score_names = ["aces", "twos", "threes", "fours", "fives", "sixes"]
@@ -21,16 +36,6 @@ class Yahtzee_calc:
         for num, name in enumerate(upper_score_names):
             upper_score_dict[name] = scores[num]
         return upper_score_dict
-
-    def update_scores(self):
-        self._upper_score = self.calculate_upper_score()
-
-    def get_upper_score(self):
-        return self._upper_score
-    
-    def calculator(self):
-        self.update_scores()
-        return self.get_upper_score()
 
     def calculate_lower_score(self):
         
@@ -59,28 +64,28 @@ class Yahtzee_calc:
         
         # score small straight
         matches = 0
-        matches1 = 0
-        matches2 = 0
-        matches3 = 0
-        for cycle in range(1, 4):
-            for num, face_value in enumerate(dice_set, cycle):
-                print(cycle, num, face_value)
-                if num == face_value and cycle == 1:
-                    matches1 += 1
-                    if matches1 > matches:
-                        matches = matches1
-                elif num == face_value and cycle == 2:
-                    matches2 += 1
-                    if matches2 > matches:
-                        matches = matches2
-                elif num == face_value and cycle == 3:
-                    matches3 += 1
-                    if matches3 > matches:
-                        matches = matches3      
-        if matches == 5:
-            lower_score_dict["lg_straight"] = 40
-        elif matches == 4:
-            lower_score_dict["sm_straight"] = 30
+        if dice_set_length >= 4:
+            matches1 = 0
+            matches2 = 0
+            matches3 = 0
+            for cycle in range(1, 4):
+                for num, face_value in enumerate(dice_set, cycle):
+                    if num == face_value and cycle == 1:
+                        matches1 += 1
+                        if matches1 > matches:
+                            matches = matches1
+                    elif num == face_value and cycle == 2:
+                        matches2 += 1
+                        if matches2 > matches:
+                            matches = matches2
+                    elif num == face_value and cycle == 3:
+                        matches3 += 1
+                        if matches3 > matches:
+                            matches = matches3      
+            if matches == 5:
+                lower_score_dict["lg_straight"] = 40
+            elif matches == 4:
+                lower_score_dict["sm_straight"] = 30
 
         # chance score
         lower_score_dict["chance"] = sum(self._dice_roll)
@@ -89,11 +94,10 @@ class Yahtzee_calc:
 
 if __name__ == "__main__":
     # create a random dice roll
-    #computer_dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
-    computer_dice_roll = [1, 3, 4, 5, 6]
-    print("initial roll before it reaches the class", computer_dice_roll)
+    computer_dice_roll = [random.randrange(1, 7) for i in range(0, 5)]
+    print(computer_dice_roll)
     # create a single instance of a turn of play using the dice roll and call it the computers turn
     computer = Yahtzee_calc(computer_dice_roll)
 
     #print ("test", computer.calculator())
-    print("overall result test", computer.calculate_lower_score())
+    print("overall result test", computer.calculator())
