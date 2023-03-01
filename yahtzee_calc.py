@@ -9,7 +9,19 @@ class Yahtzee_calc:
     
     def __init__(self, dice_roll):
         self._dice_roll = sorted(dice_roll)
-        self._score_dict = {}
+        self._score_dict = {"aces": 0,
+                             "twos": 0,
+                             "threes": 0,
+                             "fours": 0,
+                             "fives": 0,
+                             "sixes": 0,
+                             "three_of_a_kind": 0,
+                             "four_of_a_kind": 0,
+                             "full_house": 0,
+                             "sm_straight": 0,
+                             "lg_straight": 0,
+                             "yahtzee": 0
+                             }
 
     def get_dice_roll(self):
         return self._dice_roll
