@@ -4,8 +4,7 @@ class Yahtzee_calc:
     
     def __init__(self, dice_roll):
         self._dice_roll = sorted(dice_roll)
-        self._upper_score = {"aces": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0}
-        self._lower_score = {"three_of_a_kind": 0, "four_of_a_kind": 0, "full_house": 0, "sm_straight": 0, "lg_straight": 0, "yahtzee": 0, "chance": 0}
+        self._score_dict = {}
 
     def get_dice_roll(self):
         return self._dice_roll
@@ -17,17 +16,20 @@ class Yahtzee_calc:
     def update_scores(self):
         self._upper_score = self.calculate_upper_score()
         self._lower_score = self.calculate_lower_score()
+        for label, score in self._upper_score.items():
+            if score > 0:
+                self._score_dict[label] = score
+        for label, score in self._lower_score.items():
+            if score > 0:
+                self._score_dict[label] = score
+        return self._score_dict
 
-    def get_upper_score(self):
-        return self._upper_score
-    
-    def get_lower_score(self):
-        return self._lower_score
+    def get_score_dict(self):
+        return self._score_dict
     
     def calculator(self):
         self.update_scores()
-        #find highest scores
-        return self.get_upper_score(), self.get_lower_score()
+        return self.get_score_dict()
     
     def calculate_upper_score(self):
         scores = [self._dice_roll.count(i) *i for i in range(1,7)]
@@ -52,17 +54,13 @@ class Yahtzee_calc:
             elif 4 in self.dice_count():
                 kind_four = [4*i for i in range(0,7) if self._dice_roll.count(i) == 4]
                 lower_score_dict["four_of_a_kind"] = kind_four[0]
-        # elif dice_set_length == 5:
-        #     sorted_dice_roll = sorted(list(set(self._dice_roll)))
-        #     if sorted_dice_roll == [1, 2, 3, 4, 5] or sorted_dice_roll == [2, 3, 4, 5, 6]:
-        #         lower_score_dict["lg_straight"] = 40
         
         # score three of a kind
         if 3 in self.dice_count():
             kind_three = [3*i for i in range(0,7) if self._dice_roll.count(i) == 3]
             lower_score_dict["three_of_a_kind"] = kind_three[0]
         
-        # score small straight
+        # score small & large straight
         matches = 0
         if dice_set_length >= 4:
             matches1 = 0
