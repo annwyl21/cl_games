@@ -1,5 +1,6 @@
 import random, time, sys
 from datetime import datetime
+from games.games import Games
 
 ingame_message_dict = {
     "computer": "\tComputer is the WINNER\t\n", 
